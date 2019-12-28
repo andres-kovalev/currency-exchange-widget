@@ -1,0 +1,87 @@
+
+@mixin withHorizontalPadding($padding) {
+    --horizontal-padding: #{$padding};
+
+    padding-left: var(--horizontal-padding);
+    padding-right: var(--horizontal-padding);
+}
+
+.grid {
+    --footer-padding: 1rem;
+    --footer-height: calc(var(--button-line-height) + var(--button-padding-vertical) * 2 + var(--footer-padding));
+
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr 0 1fr 1fr var(--footer-height);
+}
+
+.pocket {
+    grid-column: span 6;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 1.5rem;
+
+    &.info {
+        align-items: flex-start;
+    }
+}
+
+.panel {
+    justify-self: center;
+    height: 0;
+
+    & > * {
+        transform: translateY(-50%);
+    }
+
+    &.small {
+        grid-column: span 1;
+    }
+
+    &.large {
+        grid-column: span 4;
+    }
+}
+
+.destination {
+    background-color: var(--main-bg-color-secondary);
+}
+
+.footer {
+    grid-column: span 6;
+    background-color: var(--main-bg-color-secondary);
+    padding-bottom: var(--footer-padding);
+    text-align: center;
+}
+
+.medium {
+    @include withHorizontalPadding(0.5rem);
+}
+
+.wide {
+    @include withHorizontalPadding(4rem);
+}
+
+.panelButton {
+    color: var(--button-color-secondary);
+    background-color: var(--button-bg-color-secondary);
+
+    &,
+    &:hover {
+        border: var(--button-border-color-secondary) 2px solid;
+    }
+
+    &:hover {
+        background-color: var(--button-bg-color-secondary-hover);
+    }
+}
+
+.active {
+    font-weight: bold;
+}
+
+.right {
+    text-align: right;
+}
