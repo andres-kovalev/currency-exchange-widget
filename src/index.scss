@@ -1,0 +1,117 @@
+html {
+    width: 100%;
+    height: 100%;
+    // mobile version looks better
+    font-size: 24px;
+}
+
+@media (min-width: 720px) {
+    html {
+        font-size: 48px;
+    }
+}
+
+body {
+    // mui styles
+    --button-padding-vertical: 3px;
+    --button-line-height: 1.42rem;
+    // custom variables
+    --main-bg-color: white;
+    --main-bg-color-secondary: whitesmoke;
+    --button-color-primary: white;
+    --button-bg-color-primary: deeppink;
+    --button-bg-color-primary-hover: hotpink;
+    --button-color-secondary: #0077f6;
+    --button-bg-color-secondary: var(--main-bg-color);
+    --button-bg-color-secondary-hover: #ddeeff;
+    --button-border-color-secondary: var(--main-bg-color-secondary);
+    --button-height: calc(var(--button-line-height) + var(--button-padding-vertical) * 2);
+    --button-border-radius: calc(var(--button-height) / 2);
+
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+// Small re-design of default MUI components
+.MuiInput-root {
+    &.MuiInput-underline {
+        &,
+        &:not(Mui-disabled):hover {
+            &:before,
+            &::after {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.MuiInput-input {
+    text-align: right;
+}
+
+.MuiButton-root {
+    border-radius: calc(var(--button-line-height) / 2 + var(--button-padding-vertical));
+}
+
+.MuiButton-sizeLarge {
+    --button-padding-vertical: 8px;
+    --button-line-height: 1.64rem;
+}
+
+.MuiButton-containedPrimary {
+    &,
+    &.Mui-disabled {
+        color: var(--button-color-primary);
+        background-color: var(--button-bg-color-primary);
+        transition: all 0.3s ease;
+    }
+
+    &.Mui-disabled {
+        opacity: 0.3;
+    }
+
+    &:hover {
+        background-color: var(--button-bg-color-primary-hover);
+    }
+}
+
+.MuiButton-label {
+    font-size: 0.7rem;
+}
+
+.MuiSelect-root:focus {
+    background-color: transparent;
+}
+
+// MUI uses such selector to style this component
+.MuiSelect-select.MuiSelect-select {
+    padding-right: 1rem;
+}
+
+.MuiSelect-icon {
+    top: calc(50% - 0.5rem);
+}
+
+.MuiFormHelperText-root {
+    font-size: 0.5rem;
+}
+
+.MuiSvgIcon-root {
+    font-size: 1rem;
+}
+
+#root {
+    min-width: 375px;
+    min-height: 400px;
+    height: 100%;
+}
