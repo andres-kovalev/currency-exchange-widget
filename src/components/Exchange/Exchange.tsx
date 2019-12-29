@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import cx from 'classnames';
 import { useSelector } from 'react-redux';
 import { Select, MenuItem, FormHelperText, Button, IconButton, FormControl } from '@material-ui/core';
@@ -13,7 +13,7 @@ import createAsyncTimer from '../../helper/asyncTimer';
 import * as RateService from '../../services/rateService';
 import { useActions } from '../../store';
 import currencies from '../../const/currencies.json';
-import { NumberField } from '..';
+import { NumberField, ErrorMessage } from '..';
 import { GlobalState, Pockets } from '../../store/reducer';
 
 const TIMEOUT = 10000;
@@ -61,6 +61,12 @@ const Exchange: React.FC = () => {
         alert('Not implemented yet.');
     };
 
+    const [ errorMessage, setErrorMessage ] = useState('');
+    const closeError = useCallback(
+        () => setErrorMessage(''),
+        []
+    );
+
     useEffect(() => createAsyncTimer(
         async () => {
             try {
@@ -73,6 +79,8 @@ const Exchange: React.FC = () => {
             } catch (e) {
                 // eslint-disable-next-line no-console
                 console.error(e);
+
+                setErrorMessage('Unable to get rates. Try later!');
             }
         }, TIMEOUT
     ), [ state.source.currency, state.destination.currency, actions ]);
@@ -194,6 +202,11 @@ const Exchange: React.FC = () => {
                     </Button>
                 </div>
             </div>
+            <ErrorMessage
+                open={ !!errorMessage }
+                message={ errorMessage }
+                onClose={ closeError }
+            />
         </React.Fragment>
     );
 };

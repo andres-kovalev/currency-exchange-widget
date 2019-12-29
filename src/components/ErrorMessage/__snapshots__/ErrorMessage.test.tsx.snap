@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage by default should render as expected 1`] = `
+<WithStyles(ForwardRef(Snackbar))
+  anchorOrigin={
+    Object {
+      "horizontal": "center",
+      "vertical": "top",
+    }
+  }
+  autoHideDuration={3000}
+  onClose={[Function]}
+  open={false}
+>
+  <WithStyles(ForwardRef(SnackbarContent))
+    action={
+      Array [
+        <ForwardRef(WithStyles)
+          aria-label="close"
+          color="inherit"
+          onClick={[Function]}
+        >
+          <UNDEFINED
+            className="icon"
+          />
+        </ForwardRef(WithStyles)>,
+      ]
+    }
+    aria-describedby="error-message"
+    className="container"
+    message={
+      <span
+        className="message"
+        id="error-message"
+      >
+        <UNDEFINED
+          className="icon errorIcon"
+        />
+        Test message
+      </span>
+    }
+  />
+</WithStyles(ForwardRef(Snackbar))>
+`;

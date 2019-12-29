@@ -12,6 +12,7 @@ import configureStorage from '../../store';
 import pockets from '../../const/pockets.json';
 import NumberField from '../NumberField';
 import * as RateService from '../../services/rateService';
+import ErrorMessage from '../ErrorMessage';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = (): void => {};
@@ -34,6 +35,10 @@ function setRate(rate: number): void {
 
 function goSlow(): void {
     mockRatePromise = new Promise(noop);
+}
+
+function goOffline(): void {
+    mockRatePromise = Promise.reject(new Error('Offline!'));
 }
 
 const waitForRate = (): Promise<void> => act(
@@ -215,6 +220,27 @@ describe('Exchange', () => {
 
             expect(RateService.getRate).toHaveBeenCalledTimes(2);
         });
+    });
+
+    it('should show an error message when rate end-point is not available', async () => {
+        const consoleSpy = jest.spyOn(console, 'error');
+        consoleSpy.mockImplementation(noop);
+
+        try {
+            goOffline();
+
+            const wrapper = renderWithReduxProvider(<Exchange />);
+
+            await waitForRate();
+
+            wrapper.update();
+
+            expect(wrapper.find(ErrorMessage)).toHaveProp({ open: true });
+            // eslint-disable-next-line @typescript-eslint/unbound-method, no-console
+            expect(console.error).toHaveBeenCalled();
+        } finally {
+            consoleSpy.mockRestore();
+        }
     });
 });
 
