@@ -90,6 +90,15 @@ const Exchange: React.FC = () => {
     const sourceAvailable: number = pockets[state.source.currency] || 0;
     const destinationAvailable: number = pockets[state.destination.currency] || 0;
 
+    const exchangeAllSource = useCallback(
+        () => actions.setSourceAmount(sourceAvailable),
+        [ actions, sourceAvailable ]
+    );
+    const exchangeAllDestination = useCallback(
+        () => actions.setDestinationAmount(destinationAvailable),
+        [ actions, destinationAvailable ]
+    );
+
     const { exchange } = useActions();
     const handleExchangeClick = (): void => {
         exchange(state.source, state.destination);
@@ -137,7 +146,10 @@ const Exchange: React.FC = () => {
                     />
                 </div>
                 <div className={ sourceInfoClasses }>
-                    <FormHelperText>
+                    <FormHelperText
+                        className={ styles.balance }
+                        onClick={ exchangeAllSource }
+                    >
                         { `Available: ${sourceAvailable} ${state.source.currency}` }
                     </FormHelperText>
                     { !isValid && <FormHelperText className={ styles.right }>
@@ -185,7 +197,10 @@ const Exchange: React.FC = () => {
                     </FormControl>
                 </div>
                 <div className={ destinationInfoClasses }>
-                    <FormHelperText>
+                    <FormHelperText
+                        className={ styles.balance }
+                        onClick={ exchangeAllDestination }
+                    >
                         { `Available: ${destinationAvailable} ${state.destination.currency}` }
                     </FormHelperText>
                 </div>
