@@ -9,7 +9,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "classnames": "^2.2.6",
-    "immer": "^5.1.0",
+    "immer": "^9.0.6",
     "immutable-object-update": "^2.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
